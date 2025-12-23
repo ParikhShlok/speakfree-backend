@@ -2,11 +2,7 @@ fastapi
 uvicorn[standard]
 openai
 python-dotenv
-
-# database
 sqlalchemy
 psycopg2-binary
-
-# auth
-python-jose
 passlib[bcrypt]
+python-jose
