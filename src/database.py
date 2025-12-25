@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.getenv("postgresql://postgres:[YOUR-PASSWORD]@db.sokfvjwuenouqgohxpwk.supabase.co:5432/postgres")
 
 engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -15,3 +15,4 @@ def get_db():
         yield db
     finally:
         db.close()
+
