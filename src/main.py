@@ -9,7 +9,7 @@ import os
 from database import engine
 from models import Base
 
-Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 app.include_router(upload_router)
@@ -89,4 +89,5 @@ def signup(data: SignupRequest):
     }).execute()
 
     return {"message": "User registered successfully"}
+
 
