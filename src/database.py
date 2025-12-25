@@ -7,7 +7,11 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if DATABASE_URL is None:
     raise RuntimeError("DATABASE_URL not set")
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    connect_args={"sslmode": "require"},
+)
 
 SessionLocal = sessionmaker(
     autocommit=False,
@@ -23,3 +27,4 @@ def get_db():
         yield db
     finally:
         db.close()
+
