@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 from openai import OpenAI
 from supabase import create_client
-from .upload import router as upload_router
+from upload import router as upload_router
 
 import os
 
