@@ -2,8 +2,9 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from database import get_db
-from models import Upload
+from .database import get_db
+from .models import Upload
+
 
 # ✅ SINGLE router (this is IMPORTANT)
 router = APIRouter(
@@ -42,3 +43,4 @@ def upload_text(data: UploadText, db: Session = Depends(get_db)):
         "message": "Content uploaded successfully",
         "id": upload.id
     }
+
