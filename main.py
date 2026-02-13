@@ -13,8 +13,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Make sure OPENAI_API_KEY is set in Render environment variables
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    base_url=os.getenv("OPENAI_API_BASE")  # IMPORTANT
+)
 
 class UserMessage(BaseModel):
     message: str
@@ -42,7 +44,7 @@ def chat(user: UserMessage):
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user.message}
             ],
-            max_tokens=150,  # cost control
+            max_tokens=150,
             temperature=0.7
         )
 
@@ -53,7 +55,7 @@ def chat(user: UserMessage):
     except RateLimitError:
         raise HTTPException(
             status_code=429,
-            detail="API quota exceeded. Please check billing."
+            detail="API quota exceeded."
         )
 
     except Exception as e:
